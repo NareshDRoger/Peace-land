@@ -1,0 +1,1 @@
+case class Location(Latitude:Float, Longitude:Float)
