@@ -1,4 +1,4 @@
-name := "PeaceLand_Windows_V2"
+name := "Peace-land"
 
 version := "0.1"
 
