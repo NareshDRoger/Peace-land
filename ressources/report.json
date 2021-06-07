@@ -1,0 +1,8 @@
+{"Id":"Report1","DroneReporterId":"Drone1","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"bonjour au revoir"}
+{"Id":"Report2","DroneReporterId":"Drone2","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"popopop bonsoir"}
+{"Id":"Report1","DroneReporterId":"Drone1","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"bonjour au revoir","Timestamp":"2021-05-05T18:42:47.388+02:00"}
+{"Id":"Report2","DroneReporterId":"Drone2","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"popopop bonsoir","Timestamp":"2021-05-05T18:42:47.559+02:00"}
+{"Id":"Report1","DroneReporterId":"Drone1","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"bonjour au revoir","Timestamp":"2021-05-05T18:45:49.783+02:00"}
+{"Id":"Report2","DroneReporterId":"Drone2","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"popopop bonsoir","Timestamp":"2021-05-05T18:45:49.940+02:00"}
+{"Id":"Report1","DroneReporterId":"Drone1","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"bonjour au revoir","Timestamp":"2021-05-05T18:49:11.174+02:00"}
+{"Id":"Report2","DroneReporterId":"Drone2","Location":"12.123 34.0","SurroundingCitizen":"toto","WordsHeard":"popopop bonsoir","Timestamp":"2021-05-05T18:49:11.405+02:00"}
