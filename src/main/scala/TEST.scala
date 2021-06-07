@@ -1,6 +1,8 @@
 import java.io.{BufferedWriter, FileWriter}
 import java.io.{BufferedWriter, FileWriter}
+
 import org.joda.time.DateTime
+import stream_Kafka.Produce
 
 
 object TEST extends App{
@@ -35,6 +37,15 @@ object TEST extends App{
   )
 
   file.close()
+
+
+  //DANS LE STREAM
+  //ensemble de rapport => ensemble de json => ensemble record
+  //foreach producer.send()
+  val produce = new Produce();
+
+
+
 
 
 
