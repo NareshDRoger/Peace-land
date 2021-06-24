@@ -1,16 +1,15 @@
 import java.io.{BufferedWriter, FileWriter}
 import java.io.{BufferedWriter, FileWriter}
+import java.time.Duration
 
 import org.apache.kafka.clients.producer.ProducerRecord
-
-
-
 import org.joda.time.DateTime
-import stream_Kafka.Produce
+import stream_Kafka.{Consume, Produce}
 import com.google.gson.Gson
 import org.apache.kafka.clients.consumer.{ConsumerRecord, KafkaConsumer}
 
 import scala.collection.JavaConverters._
+
 
 object TEST extends App{
 
@@ -62,11 +61,14 @@ object TEST extends App{
   val jsonKey = "keyTest"
   val gson = new Gson
   val jsonValue = gson.toJson(r1)
+  //println(jsonKey)
+
   //println(jsonValue)
+
 
   //SEND MESSAGE
   //PROBLEME DU produce.producer.send
-  val record = new ProducerRecord[String, String]("topicTest",jsonKey,jsonValue)
+  val record = new ProducerRecord[String, String]("topicTest",jsonKey,"jsonValue")
   println("RECORD")
   val produce = new Produce()
   println("INITIALISE")
@@ -78,7 +80,7 @@ object TEST extends App{
 
 
 
-  /*
+
   //READ MESSAGE
   val consume = new Consume()
   consume.consumer.subscribe(List("topicTest").asJava)
@@ -91,7 +93,7 @@ object TEST extends App{
     println(s"offset = ${record.offset()}, key = ${record.key()}, value = ${record.value()}")
   }
   consume.consumer.commitSync()
-  */
+
 
 
 
