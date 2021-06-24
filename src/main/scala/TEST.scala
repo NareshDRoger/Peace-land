@@ -1,9 +1,16 @@
 import java.io.{BufferedWriter, FileWriter}
 import java.io.{BufferedWriter, FileWriter}
 
+import org.apache.kafka.clients.producer.ProducerRecord
+
+
+
 import org.joda.time.DateTime
 import stream_Kafka.Produce
+import com.google.gson.Gson
+import org.apache.kafka.clients.consumer.{ConsumerRecord, KafkaConsumer}
 
+import scala.collection.JavaConverters._
 
 object TEST extends App{
 
@@ -27,7 +34,6 @@ object TEST extends App{
 
   //Ecritrue dans le fichier report.json
   lazy val jsonReport = listReport.map(_.serializeJson)
-
   val file = new BufferedWriter(new FileWriter("ressources/report.json", true))
   jsonReport.map(x => {
     file.write(x.toString)
@@ -36,13 +42,71 @@ object TEST extends App{
   }
   )
 
+
+
   file.close()
+
 
 
   //DANS LE STREAM
   //ensemble de rapport => ensemble de json => ensemble record
   //foreach producer.send()
-  val produce = new Produce();
+
+
+  //LE PRINCIPE :
+  //case clase => json value => String => dans le record
+
+
+
+
+  val jsonKey = "keyTest"
+  val gson = new Gson
+  val jsonValue = gson.toJson(r1)
+  //println(jsonValue)
+
+  //SEND MESSAGE
+  //PROBLEME DU produce.producer.send
+  val record = new ProducerRecord[String, String]("topicTest",jsonKey,jsonValue)
+  println("RECORD")
+  val produce = new Produce()
+  println("INITIALISE")
+  produce.producer.send(record)
+  println("SENDDDD")
+  produce.producer.close()
+
+  print("OKEY")
+
+
+
+  /*
+  //READ MESSAGE
+  val consume = new Consume()
+  consume.consumer.subscribe(List("topicTest").asJava)
+
+  //val records :ConsumerRecord[String, String] = consume.consumer.poll(Duration.ofMillis(100))
+  val records  = consume.consumer.poll(Duration.ofMillis(100))
+
+
+  records.asScala.foreach{ record =>
+    println(s"offset = ${record.offset()}, key = ${record.key()}, value = ${record.value()}")
+  }
+  consume.consumer.commitSync()
+  */
+
+
+
+  //-------------------------------------RESTE A FAIRE-------------------------------------//
+  //String => record
+  //Envoyer les records dans le produce en faisan procude.producer.send (faire un foreach)
+  //Lire le stream en implémentant un Consumer
+  //-------------------------------------RESTE A FAIRE-------------------------------------//
+
+
+
+
+
+
+
 
 
 
