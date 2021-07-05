@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="peace-land [file:/C:/Users/hejar/OneDrive/Bureau/ESGI/Spark%20streaming%20(S2)/PROJET/Git_Project/Peace-land/]" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="peace-land [file:/C:/Users/hejar/OneDrive/Bureau/ESGI/Spark%20streaming%20(S2)/PROJET_TEST/Peace-land/]" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../target/scala-2.11/classes" />
     <output-test url="file://$MODULE_DIR$/../../target/scala-2.11/test-classes" />
@@ -199,11 +199,17 @@
           <root url="jar://$MODULE_DIR$/../../null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-javadoc.jar!/" />
           <root url="jar://$MODULE_DIR$/../../null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-javadoc.jar!/" />
           <root url="jar://$MODULE_DIR$/../../null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../PROJET/Git_Project/Peace-land/null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../PROJET/Git_Project/Peace-land/null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-javadoc.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../PROJET/Git_Project/Peace-land/null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2-javadoc.jar!/" />
         </JAVADOC>
         <SOURCES>
           <root url="jar://$MODULE_DIR$/../../null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-sources.jar!/" />
           <root url="jar://$MODULE_DIR$/../../null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-sources.jar!/" />
           <root url="jar://$MODULE_DIR$/../../null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../PROJET/Git_Project/Peace-land/null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/avro/avro-mapred/1.8.2/avro-mapred-1.8.2-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../PROJET/Git_Project/Peace-land/null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-core/1.5.2/orc-core-1.5.2-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../PROJET/Git_Project/Peace-land/null/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/orc/orc-mapreduce/1.5.2/orc-mapreduce-1.5.2-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
