@@ -1,39 +1,14 @@
-import org.apache.kafka.clients.producer._
-import java.util
+package Stream
 
-import org.apache.kafka.clients.consumer.KafkaConsumer
+import java.util
 import java.util.Properties
 
-import TEST.r1
-import com.google.gson.Gson
-import org.joda.time.DateTime
+import org.apache.kafka.clients.consumer.KafkaConsumer
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
+import scala.collection.JavaConverters.iterableAsScalaIterableConverter
+import scala.concurrent.duration.Duration
 
-import scala.collection.JavaConverters._
-
-object stream_kafka_final {
-
-  def main(args: Array[String]): Unit = {
-
-
-    val c1 = new Citizen("TATA","toto",23,123)
-    val c2 = new Citizen("T","oto",223,3)
-    val c3 = new Citizen("TA","to",2223,13)
-
-    val l1 = new Location(12.123f,34.0f)
-
-    val r1 = new Report("Report1","Drone1", l1,  List(c1,c2,c3),  List("bonjour", "au revoir"),DateTime.now)
-
-
-    val jsonKey = "keyTest"
-    val gson = new Gson
-    val jsonValue = gson.toJson(r1)
-
-
-    writeToKafka("quick-start",jsonValue)
-    consumeFromKafka("quick-start")
-    print("Done")
-  }
-
+case class stream_kafka_final() {
 
 
   def writeToKafka(topic: String, value: String): Unit = {
@@ -57,16 +32,34 @@ object stream_kafka_final {
     props.put("group.id", "consumer-group")
     val consumer: KafkaConsumer[String, String] = new KafkaConsumer[String, String](props)
     consumer.subscribe(util.Arrays.asList(topic))
+
+    print("START CONSUMING")
+    val records = consumer.poll(1000)
+    records.asScala.foreach{ record =>
+      println(s"offset = ${record.offset()}, key = ${record.key()}, value = ${record.value()}")
+    }
+
+    print("FINISH CONSUMING")
+    consumer.commitSync()
+
+    /*
     var i = 0
-    while (i<10) {
-      val record = consumer.poll(1000).asScala
+    while (i < 10) {
+      val record = consumer.poll(10).asScala
       for (data <- record.iterator) {
+        println("DATA CONSUMING...")
         println(data.value())
         //LE RESTE
       }
       i = i + 1;
     }
+    */
   }
+
+
+
+
+
 
 
 }
