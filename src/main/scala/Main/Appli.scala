@@ -34,8 +34,6 @@ object Appli extends App{
     val file = new BufferedWriter(new FileWriter("resources/report.json", true))
     jsonReport.map(x => {
       file.write(x.toString)
-      //stream.writeToKafka("quick-start",x.toString)
-      //stream.consumeFromKafka("quick-start")
       file.newLine()
     }
     )

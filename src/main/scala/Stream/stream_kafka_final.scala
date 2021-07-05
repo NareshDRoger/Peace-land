@@ -42,18 +42,6 @@ case class stream_kafka_final() {
     print("FINISH CONSUMING")
     consumer.commitSync()
 
-    /*
-    var i = 0
-    while (i < 10) {
-      val record = consumer.poll(10).asScala
-      for (data <- record.iterator) {
-        println("DATA CONSUMING...")
-        println(data.value())
-        //LE RESTE
-      }
-      i = i + 1;
-    }
-    */
   }
 
 
