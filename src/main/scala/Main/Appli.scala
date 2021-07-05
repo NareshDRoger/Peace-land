@@ -4,6 +4,8 @@ import java.io.{BufferedWriter, FileWriter}
 
 import Service.{CitizenService, DroneService}
 import Stream.stream_kafka_final
+import org.apache.spark
+import org.apache.spark.sql.SparkSession
 
 import scala.io.Source
 
@@ -40,21 +42,24 @@ object Appli extends App{
     file.close()
   }
 
+
+
   generate()
 
   val filename = "resources/report.json"
-  for (line <- Source.fromFile(filename).getLines) {
-    println(line)
-    stream.writeToKafka("quick-start",line)
-    //stream.consumeFromKafka("quick-start")
-  }
+  val file = Source.fromFile(filename).getLines()
+  file.foreach{
+    line => stream.writeToKafka("quick-start",line)
 
+  }
   stream.consumeFromKafka("quick-start")
 
 
-
-
-
+  //MAINTENANT
+  /*
+  -> Gestion des alertes
+  -> Deverser dans le datalake
+   */
 
 
 
