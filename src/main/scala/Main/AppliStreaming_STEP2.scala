@@ -17,5 +17,4 @@ object AppliStreaming_STEP2 extends App{
 
   }
   //stream.consumeFromKafka("quick-start")
-
 }
