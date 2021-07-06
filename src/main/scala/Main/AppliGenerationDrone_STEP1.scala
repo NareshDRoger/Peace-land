@@ -4,22 +4,15 @@ import java.io.{BufferedWriter, FileWriter}
 
 import Service.{CitizenService, DroneService}
 import Stream.stream_kafka_final
-import org.apache.spark
-import org.apache.spark.sql.SparkSession
 
-import scala.io.Source
 
-//import TEST.r1
-import com.google.gson.Gson
-
-object Appli extends App{
+object AppliGenerationDrone_STEP1 extends App{
 
   lazy val droneService = new DroneService();
   lazy val citizenService = new CitizenService();
   val stream = new stream_kafka_final()
 
 
-  //Generate drone, report and serialize report to .json
   def generate()= {
 
     lazy val randomDrone = droneService.generateRandomDrone(3)
@@ -43,26 +36,6 @@ object Appli extends App{
   }
 
 
-
   generate()
-
-  val filename = "resources/report.json"
-  val file = Source.fromFile(filename).getLines()
-  file.foreach{
-    line => stream.writeToKafka("quick-start",line)
-
-  }
-  stream.consumeFromKafka("quick-start")
-
-
-  //MAINTENANT
-  /*
-  -> Gestion des alertes
-  -> Deverser dans le datalake
-   */
-
-
-
-
 
 }
