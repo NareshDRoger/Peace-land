@@ -1,48 +1,27 @@
+
 package Main
-import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
-import org.apache.spark._
+import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.apache.kafka.common.serialization.StringDeserializer
+import org.apache.spark.{SparkConf, SparkContext, TaskContext}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.kafka010._
+import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
+import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
+
+// METHODE SPARK STREAMING A NE PAS UTILISER
 
 object AppliGestionAlerte_STEP3 extends App{
   //APPLICATION QUI LIT LA STREAM ET QUI GERE LES ALERTES (écrit avec un composant distribué)
   //afficher en terminal à tel endroit il y a une personne qui s'énerève
 
-  /*
-  val spark = SparkSession
-    .builder()
-    .appName("Simple Spark App IABD1")
-    .master("local[*]")
-    .getOrCreate()
-
-  print("FIRST STEP")
-  import spark.implicits._
+  val conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount")
+    .set("spark.driver.allowMultipleContexts","true")
+  val ssc= new StreamingContext(conf,Seconds(10))
+  val confspark = new SparkConf().setAppName("NetworkWordCount").setMaster("local[2]")
+  val sparkcontext = new SparkContext(confspark)
 
 
-  val kafkaDF = spark.read.format("kafka")
-    .option("kafka.bootstrap.servers", "localhost:9092")
-    .option("subscribe", "quick-start")
-    .option("startingOffsets", "earliest")
-    .load()
 
-  print("SECOND STEP")
-  kafkaDF.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)", "headers")
-    .as[(String, String, Array[(String, Array[Byte])])]
-  print("THIRD STEP")
-
-
-  */
-
-
-  //LIEN
-  //https://spark.apache.org/docs/2.2.0/streaming-programming-guide.html#a-quick-example
-  //https://spark.apache.org/docs/2.2.0/streaming-kafka-0-10-integration.html
-
-
-  val conf = new SparkConf().setMaster("local[*]").setAppName("ProjetIABD")
-  val ssc = new StreamingContext(conf, Seconds(1))
-
-
-  //Au lieu du val lines = ssc.socketTextStream("localhost", 9999)
   val kafkaParams = Map[String, Object](
     "bootstrap.servers" -> "localhost:9092,anotherhost:9092",
     "key.deserializer" -> classOf[StringDeserializer],
@@ -52,24 +31,33 @@ object AppliGestionAlerte_STEP3 extends App{
     "enable.auto.commit" -> (false: java.lang.Boolean)
   )
 
-  val topics = Array("topicA", "topicB")
+  val topics = Array("quick-start")
   val stream = KafkaUtils.createDirectStream[String, String](
-    streamingContext,
+    ssc,
     PreferConsistent,
-    Subscribe[String, String](topics, kafkaParams)
-  )
-
+    Subscribe[String, String](topics, kafkaParams))
   stream.map(record => (record.key, record.value))
 
+  import org.apache.spark.streaming.kafka010.OffsetRange
 
-  // Split each line into words
-  val words = lines.flatMap(_.split(" "))
+  val offsetRanges = Array( // topic, partition, inclusive starting offset, exclusive ending offset
+    OffsetRange
+      .create("quick-start", 0, 0, 100), OffsetRange.
+      create("quick-start", 1, 0, 100))
+  //val rdd = KafkaUtils.createRDD[String,String](sparkcontext, kafkaParams, offsetRanges, PreferConsistent)
 
-  ssc.start()             // Start the computation
+  stream.foreachRDD { rdd =>
+    val offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
+    rdd.foreachPartition { iter =>
+      val o: OffsetRange = offsetRanges(TaskContext.get.partitionId)
+      println(s"${o.topic} ${o.partition} ${o.fromOffset} ${o.untilOffset}")
+    }
+  }
+
+  ssc.start()
+
+  //ATTEND LA FIN DU CALCUL
   ssc.awaitTermination()
-
-
-
 
 
 }

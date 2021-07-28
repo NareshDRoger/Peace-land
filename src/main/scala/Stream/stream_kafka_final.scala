@@ -34,7 +34,7 @@ case class stream_kafka_final() {
     consumer.subscribe(util.Arrays.asList(topic))
 
     print("START CONSUMING")
-    val records = consumer.poll(1000)
+    val records = consumer.poll(10000)
     records.asScala.foreach{ record =>
       println(s"offset = ${record.offset()}, key = ${record.key()}, value = ${record.value()}")
     }
